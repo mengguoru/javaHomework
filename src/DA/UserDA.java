@@ -11,20 +11,24 @@ import java.sql.Statement;
 
 public class UserDA {
 		
-	String url="jdbc:mysql://127.0.0.1:3306/oop";
-	Connection aCon;
-	Statement aSta;
+	static String url="jdbc:mysql://127.0.0.1:3306/oop";
+	static Connection aCon;
+	static Statement aSta;
 
 	ResultSet rs = null;
 		
 	// 初始化数据库
-	public static void init(){
+	public static void init() throws SQLException{
 		//TODO: initialize database
+		Connection aCon=DriverManager.getConnection(url, "root", "root12");
+		aSta = aCon.createStatement();
 	}
 	
 	// 关数据库
-	public static void terminate(){
+	public static void terminate() throws SQLException{
 		//TODO: terminate the link to database
+		aSta.close();
+		aCon.close();
 	}
 	
 	//返回一个帖子
@@ -35,9 +39,13 @@ public class UserDA {
 		String title = "Title";
 		String editor = "Editor";
 		String detail = "Detail";
-
+		rs=aSta.executeQuery("select * from test2 where id =1");
 		while(rs.next()){
 			//TODO: search form database, and fill in the blanks
+			time=rs.getString(1);
+			title=rs.getString(2);
+			editor=rs.getString(3);
+			detail=rs.getNString(4);
 			info_to_return.add(new DBInfo(time, title, editor, detail));
 		}
 		
