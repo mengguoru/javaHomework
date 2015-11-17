@@ -1,10 +1,10 @@
 package DA;
 
 public class DBInfo {
-	String time;
-	String title;
-	String editor;
-	String detail;
+	private String time;
+	private String title;
+	private String editor;
+	private String detail;
 	
 	public DBInfo(String time, String title, String editor, String detail) {
 		super();

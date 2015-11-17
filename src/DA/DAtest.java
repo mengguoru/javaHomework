@@ -10,16 +10,27 @@ public class DAtest {
 		UserDA temp1=new UserDA();
 		temp1.init();
 		
-		//test find()
-//		temp=temp1.find();
-//		for(Iterator<DBInfo> i = temp.iterator();i.hasNext();)
-//			System.out.println(i.next().title);
-//		temp=temp1.find();
-//		for(Iterator<DBInfo> i = temp.iterator();i.hasNext();)
-//			System.out.println(i.next().title);
-//		temp=temp1.find();
-//		for(Iterator<DBInfo> i = temp.iterator();i.hasNext();)
-//			System.out.println(i.next().title);
+		//test getNext()
+		temp=temp1.getNext();
+		for(int num = temp.size(); num > 0; num--){
+			System.out.println("Title: " + temp.get(num - 1).getTitle());
+			System.out.println("Editor: " + temp.get(num - 1).getEditor());
+		}
+		System.out.println("-------");
+		
+		temp=temp1.getNext();
+		for(int num = temp.size(); num > 0; num--){
+			System.out.println("Title: " + temp.get(num - 1).getTitle());
+			System.out.println("Editor: " + temp.get(num - 1).getEditor());
+		}
+		System.out.println("-------");
+		
+		temp=temp1.getNext();
+		for(int num = temp.size(); num > 0; num--){
+			System.out.println("Title: " + temp.get(num - 1).getTitle());
+			System.out.println("Editor: " + temp.get(num - 1).getEditor());
+		}
+		System.out.println("-------");
 		//test pass 
 		
 		// test addQuestion()
@@ -27,10 +38,10 @@ public class DAtest {
 		temp1.addQuestion(temp2);
 		//test pass
 		
-//		//test addComment()
-//		DBInfo temp3 = new DBInfo(null, "标题5","作者5", "内容5");
-//		temp1.addComment(1,temp3);
-//		//test pass
+		//test addComment()
+		DBInfo temp3 = new DBInfo(null, "标题5","作者5", "内容5");
+		temp1.addComment(29,temp3);
+		//test pass
 
 		temp1.terminate();
 	}
