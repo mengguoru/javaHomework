@@ -16,12 +16,15 @@ public class UserDA {
 	static Statement aSta;
 
 	static ResultSet rs = null;
-	static PreparedStatement ps = null;	
+	PreparedStatement ps = null;	
+	
+	static int find_id;
 	// 初始化数据库
 	public void init() throws SQLException{
 		//TODO: initialize database
-		Connection aCon=DriverManager.getConnection(url, "root", "root12");
+		aCon=DriverManager.getConnection(url, "root", "root12");
 		aSta = aCon.createStatement();
+		find_id = 1;
 	}
 	
 	// 关数据库
@@ -41,7 +44,10 @@ public class UserDA {
 		String title = "Title";
 		String editor = "Editor";
 		String detail = "Detail";
-		rs=aSta.executeQuery("select * from test2 where id =1");
+		
+		String sql = "select * from test2 where id =" + String.valueOf(find_id);
+		find_id++;
+		rs=aSta.executeQuery(sql);
 		while(rs.next()){
 			//TODO: search form database, and fill in the blanks
 			time=rs.getString(1);
@@ -56,23 +62,30 @@ public class UserDA {
 	
 	//增加一个主表项（新建问题帖子）
 	public void addQuestion(DBInfo info_to_add) throws SQLException{
-		int id = 0;
+//		int id = 0;
+		int last_inserted_id = 0;
 		String title0 = info_to_add.title;
 		String editor0 = info_to_add.editor;
 		String detail0 = info_to_add.detail;		
 		//TODO: 添加到主表中
-		ps = aCon.prepareStatement("insert into test3 values(null);", Statement.RETURN_GENERATED_KEYS);
-		ps.executeUpdate();
-		ResultSet rs1 = ps.getGeneratedKeys();
-		while(rs1.next()){
-			id = rs1.getInt(1);
-			System.out.println("数据主键：" + id);
-			String sql = "insert into test2 values(null,'"+title0+"','"+editor0+"','"+detail0+"',"+id+");";
-			rs1=aSta.executeQuery(sql);
-		}
-//			id = rs.getInt(1);
-//		String sql = "insert into test2 values(null,'"+title0+"','"+editor0+"','"+detail0+"',"+id+");";
-//		rs=aSta.executeQuery(sql);
+		
+//		ps = aCon.prepareStatement("insert into test3(id) values(null)", Statement.RETURN_GENERATED_KEYS);
+//		ps.executeUpdate();
+//		ResultSet rs1 = ps.getGeneratedKeys();
+		
+		aSta.execute("insert into test3(id) values(null)");
+		/*
+		rs=aSta.executeQuery("select * from test3");		
+		while(rs.next())
+			last_inserted_id = rs.getInt(1);
+		*/
+		rs = aSta.executeQuery("select max(id) from test3");
+		while(rs.next())
+			last_inserted_id = rs.getInt(1);
+//		
+		System.out.println("主表 id->"+last_inserted_id);
+		String sql = "insert into test2 values(null,'"+title0+"','"+editor0+"','"+detail0+"',"+last_inserted_id+");";
+		aSta.execute(sql);
 	}
 	
 	//增加一个副表项（评论原有帖子）

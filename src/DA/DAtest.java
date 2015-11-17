@@ -11,16 +11,27 @@ public class DAtest {
 		temp1.init();
 		
 		//test find()
-		temp=temp1.find();
-		for(Iterator<DBInfo> i = temp.iterator();i.hasNext();)
-			System.out.println(i.next().title);
-		// test addQuestion()
-//		DBInfo temp2 = new DBInfo(null, "标题3","蒙国儒3", "顶顶顶顶顶顶");
-//		temp1.addQuestion(temp2);
+//		temp=temp1.find();
+//		for(Iterator<DBInfo> i = temp.iterator();i.hasNext();)
+//			System.out.println(i.next().title);
+//		temp=temp1.find();
+//		for(Iterator<DBInfo> i = temp.iterator();i.hasNext();)
+//			System.out.println(i.next().title);
+//		temp=temp1.find();
+//		for(Iterator<DBInfo> i = temp.iterator();i.hasNext();)
+//			System.out.println(i.next().title);
+		//test pass 
 		
-		//test addComment()
-		DBInfo temp3 = new DBInfo(null, "标题5","作者5", "内容5");
-		temp1.addComment(1,temp3);
+		// test addQuestion()
+		DBInfo temp2 = new DBInfo(null, "标题3","蒙国儒3", "顶顶顶顶顶顶");
+		temp1.addQuestion(temp2);
+		//test pass
+		
+//		//test addComment()
+//		DBInfo temp3 = new DBInfo(null, "标题5","作者5", "内容5");
+//		temp1.addComment(1,temp3);
+//		//test pass
+
 		temp1.terminate();
 	}
 }
