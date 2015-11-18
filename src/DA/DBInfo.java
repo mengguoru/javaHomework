@@ -5,13 +5,15 @@ public class DBInfo {
 	private String title;
 	private String editor;
 	private String detail;
+	private int id;
 	
-	public DBInfo(String time, String title, String editor, String detail) {
+	public DBInfo(String time, String title, String editor, String detail, int id) {
 		super();
 		this.time = time;
 		this.title = title;
 		this.editor = editor;
 		this.detail = detail;
+		this.id = id;
 	}
 
 	public String getTime() {
@@ -37,5 +39,10 @@ public class DBInfo {
 	}
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 }

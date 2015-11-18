@@ -5,44 +5,46 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class DAtest {
-	public static void main(String[] args) throws SQLException{
+	public static void main(String[] args) throws SQLException, ClassNotFoundException{
 		ArrayList<DBInfo> temp=null;
-		UserDA temp1=new UserDA();
-		temp1.init();
+		UserDA.init();
 		
 		//test getNext()
-		temp=temp1.getNext();
+		temp=UserDA.getNext();
 		for(int num = temp.size(); num > 0; num--){
 			System.out.println("Title: " + temp.get(num - 1).getTitle());
 			System.out.println("Editor: " + temp.get(num - 1).getEditor());
+			System.out.println("detail: " + temp.get(num - 1).getDetail());
 		}
 		System.out.println("-------");
 		
-		temp=temp1.getNext();
+		temp=UserDA.getNext();
 		for(int num = temp.size(); num > 0; num--){
 			System.out.println("Title: " + temp.get(num - 1).getTitle());
 			System.out.println("Editor: " + temp.get(num - 1).getEditor());
+			System.out.println("detail: " + temp.get(num - 1).getDetail());
 		}
 		System.out.println("-------");
 		
-		temp=temp1.getNext();
+		temp=UserDA.getNext();
 		for(int num = temp.size(); num > 0; num--){
 			System.out.println("Title: " + temp.get(num - 1).getTitle());
 			System.out.println("Editor: " + temp.get(num - 1).getEditor());
+			System.out.println("detail: " + temp.get(num - 1).getDetail());
 		}
 		System.out.println("-------");
 		//test pass 
 		
 		// test addQuestion()
-		DBInfo temp2 = new DBInfo(null, "标题3","蒙国儒3", "顶顶顶顶顶顶");
-		temp1.addQuestion(temp2);
+		DBInfo temp2 = new DBInfo(null, "title title title","mgr3", "123456789", 0);
+		UserDA.addQuestion(temp2);
 		//test pass
 		
 		//test addComment()
-		DBInfo temp3 = new DBInfo(null, "标题5","作者5", "内容5");
-		temp1.addComment(29,temp3);
+		DBInfo temp3 = new DBInfo(null, "comment","作者5", "comment comment", 0);
+		UserDA.addComment(1,temp3);
 		//test pass
 
-		temp1.terminate();
+		UserDA.terminate();
 	}
 }

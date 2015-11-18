@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.mysql.jdbc.Driver;
+
 
 public class UserDA {
 		
@@ -16,19 +18,28 @@ public class UserDA {
 	static Statement aSta;
 
 	static ResultSet rs = null;
-	PreparedStatement ps = null;	
+	static PreparedStatement ps = null;	
 	
 	static int find_id;
 	// 初始化数据库
-	public void init() throws SQLException{
+	public static void init() throws SQLException, ClassNotFoundException{
 		//TODO: initialize database
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		aCon=DriverManager.getConnection(url, "root", "root12");
 		aSta = aCon.createStatement();
 		find_id = 1;
 	}
 	
 	// 关数据库
-	public void terminate() throws SQLException{
+	public static void terminate() throws SQLException{
 		//TODO: terminate the link to database
 		if(null != ps) ps.close();
 		if(null !=rs) rs.close();
@@ -37,16 +48,15 @@ public class UserDA {
 	}
 	
 	//返回一个帖子
-	public ArrayList<DBInfo> getNext() throws SQLException{
+	public static ArrayList<DBInfo> getNext() throws SQLException{
 		ArrayList<DBInfo> info_to_return = new ArrayList<DBInfo>();
 		
-		String time = "Time";
-		String title = "Title";
-		String editor = "Editor";
-		String detail = "Detail";
+		String time;
+		String title;
+		String editor;
+		String detail;
 		
 		String sql = "select * from test2 where id =" + String.valueOf(find_id);
-		find_id++;
 		rs=aSta.executeQuery(sql);
 		while(rs.next()){
 			//TODO: search form database, and fill in the blanks
@@ -54,14 +64,15 @@ public class UserDA {
 			title=rs.getString(2);
 			editor=rs.getString(3);
 			detail=rs.getNString(4);
-			info_to_return.add(new DBInfo(time, title, editor, detail));
+			info_to_return.add(new DBInfo(time, title, editor, detail, find_id));
 		}
+		find_id++;
 		
 		return info_to_return;
 	}
 	
 	//增加一个主表项（新建问题帖子）
-	public void addQuestion(DBInfo info_to_add) throws SQLException{
+	public static void addQuestion(DBInfo info_to_add) throws SQLException{
 		int last_inserted_id = 0;
 		String title0 = info_to_add.getTitle();
 		String editor0 = info_to_add.getEditor();
@@ -79,10 +90,11 @@ public class UserDA {
 	}
 	
 	//增加一个副表项（评论原有帖子）
-	public void addComment(int id/* 主表的id */, DBInfo info_to_add) throws SQLException{
+	public static void addComment(int id/* 主表的id */, DBInfo info_to_add) throws SQLException{
 		String title0 = info_to_add.getTitle();
 		String editor0 = info_to_add.getEditor();
-		String detail0 = info_to_add.getDetail();	
+		String detail0 = info_to_add.getDetail();
+		System.out.println(detail0);
 		//TODO: 根据id，添加到副表中
 		
 		String sql;
