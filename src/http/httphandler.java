@@ -179,21 +179,152 @@ public class httphandler extends HttpServlet {
 			    "sourceObj.innerHTML = openTip;  } } }  "+
 			"</script>  "+
 			"<title>班级问题交流</title>  "+
+			"<script type='text/javascript' async='' src='../ga.js'></script>"
+			+ "<script type='text/javascript' src='../modernizr.custom.66147.js'></script>"+
+	        "<script type='text/javascript' src='../qio6inw.js'></script>"+
+	        "<link rel='stylesheet' href='../responsive-tables.css'>"+
+	        "<link rel='stylesheet' href='../style.css'>"+
+			"<script type='text/javascript' src='../25093.js'></script>"+
+			"<script  src='../jquery1.js'></script>"+
+	        "<script type='text/javascript' src='../jqueryform.js'></script>"+
 			"</head>  "+
-			"<body>  "+
+			"<body  class='home'>  "+
 			
+			
+			
+			
+			
+			
+
+		    
+	        "<section class='intro'>"+
+
+	                "<div class='page-width'>"+
+	                    "<div class='intro-text'>"+
+	                       "<p style='font-family=微软雅黑' class='intro-main fade'>OOP心得交流，只要你要，只要我有</p>" +
+	                       "<p style='font-family:微软雅黑' class='clear fade'>  </p>"+
+	                       "<p style='font-family:微软雅黑' class='fade'><strong>  </strong></p>"+
+	                    "</div>"+
+	                "</div>"+
+	            "</section>"+
+
+	    "<div class='wrapper'>"+
+	        
+	        "<header class='header'>"+
+
+	            "<div class='page-width'>"+
+	             "<div class='mobile-nav'>"+
+	                               "</div>"+
+
+	              "  <ul class='nav left-align'>"+
+	                
+	              "  <li><a style='font-family:微软雅黑' href='index2.html' title='Work' tabindex=''>发表新帖</a></li>"+
+	                
+	                "</ul>"+
+	            "</div>"+
+	        "</header>"+
+	                
+	        
+"<h1>提问</h1>"+
+"<form action='httphandler' method='get'>"+
+"<label for='editor'>你的姓名</label>"+
+"<input type='text' name='editor' value='a visitor'>"+
+"<br/><label for='title'>你想问</label>"+
+"<input type='text' name='title'>"+
+"<br/><label for='detail'>详细内容</label>"+
+"<input type='text' name='detail' value='如题'>"+
+"<input type='text' name='type' style='display:none' value=2>"+
+"<input type='submit' value='提交'>"+
+"</form>" + "<hr/>"+
+	        
+	        
+	        
+	        "<div class='main'>"+
+
+	            "<section class='some-of-our-work'>"+
+	                "<h1 style='font-family:微软雅黑'>  </h1>"+
+	                "<div class='page-width'>"+
+	                "<ul class='some-of-our-work-grid' id='details'>"+
+	                    
+	                        
+	                     "<li class='some-of-our-work-item visible'>"+
+	                     "<article class='some-of-our-work-item-info'>"+
+	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
+	                     "</article>"+
+	                     "</li>"+
+	                     
+	                     "<li class='some-of-our-work-item visible'>"+
+	                     "<article class='some-of-our-work-item-info'>"+
+	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
+	                     "</article>"+
+	                     "</li>"+
+	                        
+	                     "<li class='some-of-our-work-item visible'>"+
+	                     "<article class='some-of-our-work-item-info'>"+
+	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
+	                     "</article>"+
+	                     "</li>"+
+	                    
+	                     "<li class='some-of-our-work-item visible'>"+
+	                     "<article class='some-of-our-work-item-info'>"+
+	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
+	                     "</article>"+
+	                     "</li>"+
+	                    
+	                     "<li class='some-of-our-work-item visible'>"+
+	                     "<article class='some-of-our-work-item-info'>"+
+	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
+	                     "</article>"+
+	                     "</li>"+
+	                     
+	                     "<li class='some-of-our-work-item visible'>"+
+	                     "<article class='some-of-our-work-item-info'>"+
+	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
+	                     "</article>"+
+	                     "</li>"+
+	                    
+	                "</ul>"+
+	            "</div>"+
+	            "</section>"+
+
+	            "<div class='grad-area'>"+
+	          
+
+	                "<section class='from-the-blog trans-white-bg'>"+
+	                    "<div class='from-the-blog-wrapper visible'>"+
+	                        "<article class='from-the-blog-article'>"+
+	                                
+	                            "<p style='font-family:微软雅黑'>  </p>"+                                  
+	                                                                            
+	                            "<a style='font-family:微软雅黑' href='' class='btn'>"+
+	                                  
+	                            "</a>"+
+	                            
+	                       "</article>"+
+	                    "</div>"+
+	                "</section>"+
+
+	                
+	            "</div>"+
+	    "<nav class='hidden-nav'>"+
+	      "<div class='page-width'>"+
+
+	            "<ul class='nav'>"+
+	                "<li><a  style='font-family:微软雅黑' href='' title='Work' tabindex=''>登陆</a></li>"+
+
+	                "<li><a  style='font-family:微软雅黑' href='' title='Work' tabindex=''>注册</a></li>"+
+
+	                "<li><a style='font-family:微软雅黑' href='' title='Work' tabindex=''>发表新帖</a></li>"+
+	            "</ul>"+
+
+	            "<a href='' class='scroll-logo'>"+
+	                "<img src='' class='white-logo' alt=''>"+
+	            "</a>"+
+	        "</div>"+
+	      "</nav>"
+	       
 			//TODO
-			"<h1>提问</h1>"+
-			"<form action='httphandler' method='get'>"+
-			"<label for='editor'>你的姓名</label>"+
-			"<input type='text' name='editor' value='a visitor'>"+
-			"<br/><label for='title'>你想问</label>"+
-			"<input type='text' name='title'>"+
-			"<br/><label for='detail'>详细内容</label>"+
-			"<input type='text' name='detail' value='如题'>"+
-			"<input type='text' name='type' style='display:none' value=2>"+
-			"<input type='submit' value='提交'>"+
-			"</form>" + "<hr/>"
+			
 			);
 	}
 	private void printtail(PrintWriter out){

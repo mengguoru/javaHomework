@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <meta name="description" content="">
 		<title>OOP交流网</title>
 
-        <script type="text/javascript" async="" src="./OOP/ga.js"></script><script type="text/javascript" src="modernizr.custom.66147.js"></script>
+        <script type="text/javascript" async="" src="ga.js"></script><script type="text/javascript" src="modernizr.custom.66147.js"></script>
         <script type="text/javascript" src="qio6inw.js"></script>
         <link rel="stylesheet" href="responsive-tables.css">
         <link rel="stylesheet" href="style.css">
