@@ -72,17 +72,20 @@ public class httphandler extends HttpServlet {
 						if(info.size() == 0)
 							break;
 						
-						out.print("<h3>"+info.get(0).getTitle() + "</h3>" + "<p>" + info.get(0).getEditor() + " at " + info.get(0).getTime() + "</p>");
+						out.print("<li >");
 						out.print("<p><button onclick=\"openShutManager(this,"+"'"+String.valueOf(tips)+"'"+",false,'收起','展开')\">点击展开</button></p> ");
+						out.print("<article>");
+						
+						out.print("<h3>"+info.get(0).getTitle() + "</h3>"  + info.get(0).getEditor() + " at " + info.get(0).getTime() );
 						out.print("<div id="+"'"+String.valueOf(tips)+"'"+" style='display:none'> ");
 						for(int num = info.size(); num > 0; num--){
-							out.print("<p>");
-							out.print(info.get(num - 1).getTime());
-							out.print("</p>");
+							//out.print("<p>");
+							out.print("<br/>" + info.get(num - 1).getTime());
+							//out.print("</p>");
 							out.print("<h5>" + info.get(num - 1).getEditor() + " 说: " + "</h5>");
-							out.print("<p>");
+							//out.print("<p>");
 							out.print(info.get(num - 1).getDetail());
-							out.print("</p>");
+							//out.print("</p>");
 						}
 						out.print("<form action='httphandler' method='get'>");
 						out.print("<label for='editor'>你的姓名</label>");
@@ -94,6 +97,9 @@ public class httphandler extends HttpServlet {
 						out.print("<input type='submit' value='提交'>");
 						out.print("</form>");
 						out.print("</div>");
+						
+						out.print("</article>" + "</li>");
+						
 						out.print("<hr/>");
 						tips++;
 					}while(true);
@@ -218,15 +224,16 @@ public class httphandler extends HttpServlet {
 
 	              "  <ul class='nav left-align'>"+
 	                
-	              "  <li><a style='font-family:微软雅黑' href='index2.html' title='Work' tabindex=''>发表新帖</a></li>"+
+	              "  <li><a style='font-family:微软雅黑' href='#x' title='Work' tabindex=''>发表新帖</a></li>"+
+	              "<li><a style='font-family:微软雅黑' href='#y' title='Work' tabindex=''>查看问题</a></li>"+
 	                
 	                "</ul>"+
 	            "</div>"+
 	        "</header>"+
 	                
-	        
-"<h1>提问</h1>"+
-"<form action='httphandler' method='get'>"+
+	  "<div id='x' style='height:600px'>"+      
+"<center><h1>提问</h1></center>"+
+"<center><form action='httphandler' method='get'>"+
 "<label for='editor'>你的姓名</label>"+
 "<input type='text' name='editor' value='a visitor'>"+
 "<br/><label for='title'>你想问</label>"+
@@ -235,18 +242,46 @@ public class httphandler extends HttpServlet {
 "<input type='text' name='detail' value='如题'>"+
 "<input type='text' name='type' style='display:none' value=2>"+
 "<input type='submit' value='提交'>"+
-"</form>" + "<hr/>"+
+"</form></center>" + 
+"</div>"+
+
+"<center><a style='font-family:微软雅黑' href='' class='btn'>"+
+"Top"+
+"</a></center>"+
 	        
 	        
-	        
-	        "<div class='main'>"+
+	        "<div class='main' id='y'>"+
 
 	            "<section class='some-of-our-work'>"+
 	                "<h1 style='font-family:微软雅黑'>  </h1>"+
 	                "<div class='page-width'>"+
-	                "<ul class='some-of-our-work-grid' id='details'>"+
+	                "<ul class='some-of-our-work-grid' id='details'>"
 	                    
+	    /*                    
+	                     "<li class='some-of-our-work-item visible'>"+
+	                     "<article class='some-of-our-work-item-info'>"+
+	                     "<h2 style='font-family:微软雅黑'> 123 </h2>hello world"+   
+	                     "</article>"+
+	                     "</li>"+
+	                     
+	                     "<li class='some-of-our-work-item visible'>"+
+	                     "<article class='some-of-our-work-item-info'>"+
+	                     "<h2 style='font-family:微软雅黑'> 456 </h2>"+   
+	                     "</article>"+
+	                     "</li>"+
 	                        
+	                     "<li class='some-of-our-work-item visible'>"+
+	                     "<article class='some-of-our-work-item-info'>"+
+	                     "<h2 style='font-family:微软雅黑'> 789 </h2>"+   
+	                     "</article>"+
+	                     "</li>"+
+	                    
+	                     "<li class='some-of-our-work-item visible'>"+
+	                     "<article class='some-of-our-work-item-info'>"+
+	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
+	                     "</article>"+
+	                     "</li>"+
+	                    
 	                     "<li class='some-of-our-work-item visible'>"+
 	                     "<article class='some-of-our-work-item-info'>"+
 	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
@@ -258,32 +293,16 @@ public class httphandler extends HttpServlet {
 	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
 	                     "</article>"+
 	                     "</li>"+
-	                        
-	                     "<li class='some-of-our-work-item visible'>"+
-	                     "<article class='some-of-our-work-item-info'>"+
-	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
-	                     "</article>"+
-	                     "</li>"+
-	                    
-	                     "<li class='some-of-our-work-item visible'>"+
-	                     "<article class='some-of-our-work-item-info'>"+
-	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
-	                     "</article>"+
-	                     "</li>"+
-	                    
-	                     "<li class='some-of-our-work-item visible'>"+
-	                     "<article class='some-of-our-work-item-info'>"+
-	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
-	                     "</article>"+
-	                     "</li>"+
-	                     
-	                     "<li class='some-of-our-work-item visible'>"+
-	                     "<article class='some-of-our-work-item-info'>"+
-	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
-	                     "</article>"+
-	                     "</li>"+
-	                    
-	                "</ul>"+
+	        */            
+	                
+	       
+			//TODO
+			
+			);
+	}
+	private void printtail(PrintWriter out){
+		out.print(
+				"</ul>"+
 	            "</div>"+
 	            "</section>"+
 
@@ -297,7 +316,7 @@ public class httphandler extends HttpServlet {
 	                            "<p style='font-family:微软雅黑'>  </p>"+                                  
 	                                                                            
 	                            "<a style='font-family:微软雅黑' href='' class='btn'>"+
-	                                  
+	                                  "Top"+
 	                            "</a>"+
 	                            
 	                       "</article>"+
@@ -321,13 +340,8 @@ public class httphandler extends HttpServlet {
 	                "<img src='' class='white-logo' alt=''>"+
 	            "</a>"+
 	        "</div>"+
-	      "</nav>"
-	       
-			//TODO
-			
-			);
-	}
-	private void printtail(PrintWriter out){
+	      "</nav>");
+		
 		out.println("  </body>");
 		out.println("</html>");
 		out.flush();
