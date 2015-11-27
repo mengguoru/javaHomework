@@ -191,8 +191,6 @@ public class httphandler extends HttpServlet {
 	        "<link rel='stylesheet' href='../responsive-tables.css'>"+
 	        "<link rel='stylesheet' href='../style.css'>"+
 			"<script type='text/javascript' src='../25093.js'></script>"+
-			"<script  src='../jquery1.js'></script>"+
-	        "<script type='text/javascript' src='../jqueryform.js'></script>"+
 			"</head>  "+
 			"<body  class='home'>  "+
 			
@@ -256,48 +254,6 @@ public class httphandler extends HttpServlet {
 	                "<h1 style='font-family:微软雅黑'>  </h1>"+
 	                "<div class='page-width'>"+
 	                "<ul class='some-of-our-work-grid' id='details'>"
-	                    
-	    /*                    
-	                     "<li class='some-of-our-work-item visible'>"+
-	                     "<article class='some-of-our-work-item-info'>"+
-	                     "<h2 style='font-family:微软雅黑'> 123 </h2>hello world"+   
-	                     "</article>"+
-	                     "</li>"+
-	                     
-	                     "<li class='some-of-our-work-item visible'>"+
-	                     "<article class='some-of-our-work-item-info'>"+
-	                     "<h2 style='font-family:微软雅黑'> 456 </h2>"+   
-	                     "</article>"+
-	                     "</li>"+
-	                        
-	                     "<li class='some-of-our-work-item visible'>"+
-	                     "<article class='some-of-our-work-item-info'>"+
-	                     "<h2 style='font-family:微软雅黑'> 789 </h2>"+   
-	                     "</article>"+
-	                     "</li>"+
-	                    
-	                     "<li class='some-of-our-work-item visible'>"+
-	                     "<article class='some-of-our-work-item-info'>"+
-	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
-	                     "</article>"+
-	                     "</li>"+
-	                    
-	                     "<li class='some-of-our-work-item visible'>"+
-	                     "<article class='some-of-our-work-item-info'>"+
-	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
-	                     "</article>"+
-	                     "</li>"+
-	                     
-	                     "<li class='some-of-our-work-item visible'>"+
-	                     "<article class='some-of-our-work-item-info'>"+
-	                     "<h2 style='font-family:微软雅黑'>  </h2>"+   
-	                     "</article>"+
-	                     "</li>"+
-	        */            
-	                
-	       
-			//TODO
-			
 			);
 	}
 	private void printtail(PrintWriter out){

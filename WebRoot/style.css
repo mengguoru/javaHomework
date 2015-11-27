@@ -3349,7 +3349,6 @@ footer {
         top: 50%;
         left: 50%;
         position: absolute;
-        background: url(images/sprite.svg) no-repeat;
         background-size: 1000px 1000px; }
       .project-navigation .prev-project:hover,
       .project-navigation .next-project:hover {
