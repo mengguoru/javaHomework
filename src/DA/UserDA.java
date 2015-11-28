@@ -21,7 +21,7 @@ public class UserDA {
 	static PreparedStatement ps = null;	
 	
 	static int find_id;
-	// ³õÊ¼»¯Êý¾Ý¿â
+	// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 	public static void init() throws SQLException, ClassNotFoundException{
 		//TODO: initialize database
 		try {
@@ -38,7 +38,7 @@ public class UserDA {
 		find_id = 1;
 	}
 	
-	// ¹ØÊý¾Ý¿â
+	// ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 	public static void terminate() throws SQLException{
 		//TODO: terminate the link to database
 		if(null != ps) ps.close();
@@ -47,7 +47,40 @@ public class UserDA {
 		aCon.close();
 	}
 	
-	//·µ»ØÒ»¸öÌû×Ó
+	public static ArrayList<String> getIds() throws SQLException{
+		ArrayList<String> info = new ArrayList<String>();
+		String sql = "select * from test3 order by id desc";
+		rs = aSta.executeQuery(sql);
+		while(rs.next()){
+			info.add(rs.getString(1));
+		}
+		return info;
+	}
+	
+	//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public static ArrayList<DBInfo> getNextByID(String ID) throws SQLException{
+		ArrayList<DBInfo> info_to_return = new ArrayList<DBInfo>();
+		
+		String time;
+		String title;
+		String editor;
+		String detail;
+		
+		String sql = "select * from test2 where id =" + ID
+				 + " order by Time desc";
+		rs=aSta.executeQuery(sql);
+		while(rs.next()){
+			//TODO: search form database, and fill in the blanks
+			time=rs.getString(1);
+			title=rs.getString(2);
+			editor=rs.getString(3);
+			detail=rs.getNString(4);
+			info_to_return.add(new DBInfo(time, title, editor, detail, find_id));
+		}
+		
+		return info_to_return;
+	}
+	
 	public static ArrayList<DBInfo> getNext() throws SQLException{
 		ArrayList<DBInfo> info_to_return = new ArrayList<DBInfo>();
 		
@@ -56,7 +89,8 @@ public class UserDA {
 		String editor;
 		String detail;
 		
-		String sql = "select * from test2 where id =" + String.valueOf(find_id);
+		String sql = "select * from test2 where id =" + String.valueOf(find_id)
+				 + "order by Time desc";
 		rs=aSta.executeQuery(sql);
 		while(rs.next()){
 			//TODO: search form database, and fill in the blanks
@@ -71,31 +105,31 @@ public class UserDA {
 		return info_to_return;
 	}
 	
-	//Ôö¼ÓÒ»¸öÖ÷±íÏî£¨ÐÂ½¨ÎÊÌâÌû×Ó£©
+	//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¨ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½
 	public static void addQuestion(DBInfo info_to_add) throws SQLException{
 		int last_inserted_id = 0;
 		String title0 = info_to_add.getTitle();
 		String editor0 = info_to_add.getEditor();
 		String detail0 = info_to_add.getDetail();		
-		//TODO: Ìí¼Óµ½Ö÷±íÖÐ
+		//TODO: ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 		aSta.execute("insert into test3(id) values(null)");
 		rs = aSta.executeQuery("select LAST_INSERT_ID()");
 		rs.next();
 		last_inserted_id = rs.getInt(1);
 //		
-		System.out.println("Ö÷±í id->"+last_inserted_id);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ id->"+last_inserted_id);
 		String sql = "insert into test2 values(null,'"+title0+"','"+editor0+"','"+detail0+"',"+last_inserted_id+");";
 		aSta.execute(sql);
 	}
 	
-	//Ôö¼ÓÒ»¸ö¸±±íÏî£¨ÆÀÂÛÔ­ÓÐÌû×Ó£©
-	public static void addComment(int id/* Ö÷±íµÄid */, DBInfo info_to_add) throws SQLException{
+	//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¨ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½
+	public static void addComment(int id/* ï¿½ï¿½ï¿½ï¿½ï¿½id */, DBInfo info_to_add) throws SQLException{
 		String title0 = info_to_add.getTitle();
 		String editor0 = info_to_add.getEditor();
 		String detail0 = info_to_add.getDetail();
 		System.out.println(detail0);
-		//TODO: ¸ù¾Ýid£¬Ìí¼Óµ½¸±±íÖÐ
+		//TODO: ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 		String sql;
 		

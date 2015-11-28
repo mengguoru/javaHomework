@@ -63,47 +63,51 @@ public class httphandler extends HttpServlet {
 				case 1:
 					// get all information
 					ArrayList<DBInfo> info = new ArrayList<DBInfo>();
+					ArrayList<String> idinfo = UserDA.getIds();
 					int tips = 0;
 					
 					// TODO
-					printhead(out);
-					do{
-						info = UserDA.getNext();
+					for(int n = 0; n < idinfo.size(); n++){
+						info = UserDA.getNextByID(idinfo.get(n));
 						if(info.size() == 0)
 							break;
 						
-						out.print("<li >");
-						out.print("<p><button onclick=\"openShutManager(this,"+"'"+String.valueOf(tips)+"'"+",false,'收起','展开')\">点击展开</button></p> ");
-						out.print("<article>");
+						out.print("<li style='border:2px solid #000' id='" + info.get(0).getTitle() + "'>");
+						out.print("<font size=5 face='楷体'><button style='float:right;color:white;background:#5adae2;margin-right:10px;margin-top:10px' onclick=\"openShutManager(this,"+"'"+String.valueOf(tips)+"'"+",false,'收起','展开')\">"
+								+ "点击展开"
+								+ "</button></font>");
 						
-						out.print("<h3>"+info.get(0).getTitle() + "</h3>"  + info.get(0).getEditor() + " at " + info.get(0).getTime() );
+						out.print("<h1 style='margin-left:60px'>"+info.get(0).getTitle() + "</h1>"  
+								+ "<font style='margin-left:100px' face='Axure Handwriting'>"
+								+ info.get(0).getEditor() + " at " + info.get(0).getTime()
+								+ "</font>");
+						out.print("<article style='margin-left:80px;margin-right:50px'>");
 						out.print("<div id="+"'"+String.valueOf(tips)+"'"+" style='display:none'> ");
 						for(int num = info.size(); num > 0; num--){
-							//out.print("<p>");
-							out.print("<br/>" + info.get(num - 1).getTime());
-							//out.print("</p>");
-							out.print("<h5>" + info.get(num - 1).getEditor() + " 说: " + "</h5>");
-							//out.print("<p>");
-							out.print(info.get(num - 1).getDetail());
-							//out.print("</p>");
+							out.print("<br/>" + "<span style='float:right'>" + info.get(num - 1).getTime() + "</span>");
+							out.print("<h3>" + info.get(num - 1).getEditor() + " 说: " + "</h3>");
+							out.print("<font face='黑体'>" + info.get(num - 1).getDetail() + "</font>");
+							out.print("<hr/><hr/>");
 						}
-						out.print("<form action='httphandler' method='get'>");
-						out.print("<label for='editor'>你的姓名</label>");
+						out.print("<hr/><br/><form action='javaHomework/servlet/httphandler' method='get'>");
+						out.print("<label for='editor'><font face='华文行楷' size=5>你的姓名</font></label>");
 						out.print("<input type='text' name='editor' value='a visitor'>");
-						out.print("<br/><label for='detail'>你想说</label>");
-						out.print("<input type='text' name='detail'>");
-						out.print("<input type='text' name='id' style='display:none' value=" + String.valueOf(info.get(0).getId()) + ">");
+						out.print("<br/><br/><label for='detail'><font face='华文行楷' size=5>你想说：</font></label>");
+						out.print("<textarea name='detail' style='width:650px; height=80px'></textarea>");
+						out.print("<input type='text' name='id' style='display:none' value=" + idinfo.get(n) + ">");
 						out.print("<input type='text' name='type' style='display:none' value=3>");
-						out.print("<input type='submit' value='提交'>");
+						out.print("<input typt='text' name='title' style='display:none' value='" + info.get(0).getTitle() + "'>");
+						out.print("<br/><input type='submit' value='提交' style='height:35px'>");
+						out.print("<a href='javaHomework/index.jsp' style='float:right'>TOP</a>");
 						out.print("</form>");
 						out.print("</div>");
 						
-						out.print("</article>" + "</li>");
+						out.print("</article>");
+						out.print("</li>");
 						
 						out.print("<hr/>");
 						tips++;
-					}while(true);
-					printtail(out);
+					}
 					
 					break;
 				case 2:{
@@ -118,7 +122,7 @@ public class httphandler extends HttpServlet {
 					if(editor != null)
 						editor = new String(editor.getBytes("ISO-8859-1"), "UTF-8");
 					UserDA.addQuestion(new DBInfo(null, title, editor, detail, 0));
-					res.sendRedirect("httphandler?type=1");
+					res.sendRedirect("../..//javaHomework/index.jsp#" + "questions");
 					break;
 				}
 				case 3:{
@@ -134,7 +138,7 @@ public class httphandler extends HttpServlet {
 					if(editor != null)
 						editor = new String(editor.getBytes("ISO-8859-1"), "UTF-8");
 					UserDA.addComment(id, new DBInfo(null, title, editor, detail, 0));
-					res.sendRedirect("httphandler?type=1");
+					res.sendRedirect("../..//javaHomework/index.jsp#" + "questions");
 					break;
 				}
 				case 4:{
@@ -146,6 +150,46 @@ public class httphandler extends HttpServlet {
 					System.out.println("中文" + new String(req.getParameter("test").getBytes("ISO-8859-1"), "UTF-8"));
 					break;
 				}
+				case 6:{
+					String json;
+					ArrayList<DBInfo> jinfo = new ArrayList<DBInfo>();
+					
+					json = "[";
+					boolean ishead = true;
+					do{
+						jinfo = UserDA.getNext();
+						if(jinfo.size() == 0)
+							break;
+						
+						if(ishead != true)
+							json = json + ",";
+						else
+							ishead = false;
+						
+						json = json + "{";
+						boolean ishead1 = true;
+						for(int num = jinfo.size(); num > 0; num--){
+							if(ishead1 == true)
+								ishead1 = false;
+							else
+								json = json + ",";
+							
+							json = json + "{";
+							json = json + "\"editor\":\"" + jinfo.get(num - 1).getEditor() + "\",";
+							json = json + "\"time\":\"" + jinfo.get(num - 1).getTime() + "\",";
+							json = json + "\"detail\":\"" + jinfo.get(num - 1).getDetail();
+							json = json + "\"}";
+						}
+						json = json + "}";
+					}while(true);
+					json = json + "]";
+					
+					out.print(json);
+					break;
+				}
+				case 7:{
+					break;
+				}				
 				default:
 					break;
 				}
@@ -160,151 +204,6 @@ public class httphandler extends HttpServlet {
 		}
 	}
 	
-	private void printhead(PrintWriter out){
-		out.print(
-			"<html xmlns='http://www.w3.org/1999/xhtml'>"+
-			"<head> "+ 
-			"<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"+
-			"<style type='text/css'>"+
-			"#box,#box2,#box3,#box4{padding:10px;border:1px solid green;}"+
-			"</style>"+
-			"<script type='text/javascript'>"+
-			"function openShutManager(oSourceObj,oTargetObj,shutAble,oOpenTip,oShutTip){"+
-			"var sourceObj = typeof oSourceObj == 'string' ? document.getElementById(oSourceObj) : oSourceObj;  "+
-			"var targetObj = typeof oTargetObj == 'string' ? document.getElementById(oTargetObj) : oTargetObj;  "+
-			"var openTip = oOpenTip || '';  "+
-			"var shutTip = oShutTip || '';  "+
-			"if(targetObj.style.display!='none'){  "+
-			   "if(shutAble) return;  "+
-			   "targetObj.style.display='none';  "+
-			   "if(openTip  &&  shutTip){  "+
-			    "sourceObj.innerHTML = shutTip;   }"+  
-			"} else {  "+
-			   "targetObj.style.display='block'; "+ 
-			   "if(openTip  &&  shutTip){  "+
-			    "sourceObj.innerHTML = openTip;  } } }  "+
-			"</script>  "+
-			"<title>班级问题交流</title>  "+
-			"<script type='text/javascript' async='' src='../ga.js'></script>"
-			+ "<script type='text/javascript' src='../modernizr.custom.66147.js'></script>"+
-	        "<script type='text/javascript' src='../qio6inw.js'></script>"+
-	        "<link rel='stylesheet' href='../responsive-tables.css'>"+
-	        "<link rel='stylesheet' href='../style.css'>"+
-			"<script type='text/javascript' src='../25093.js'></script>"+
-			"</head>  "+
-			"<body  class='home'>  "+
-			
-			
-			
-			
-			
-			
-
-		    
-	        "<section class='intro'>"+
-
-	                "<div class='page-width'>"+
-	                    "<div class='intro-text'>"+
-	                       "<p style='font-family=微软雅黑' class='intro-main fade'>OOP心得交流，只要你要，只要我有</p>" +
-	                       "<p style='font-family:微软雅黑' class='clear fade'>  </p>"+
-	                       "<p style='font-family:微软雅黑' class='fade'><strong>  </strong></p>"+
-	                    "</div>"+
-	                "</div>"+
-	            "</section>"+
-
-	    "<div class='wrapper'>"+
-	        
-	        "<header class='header'>"+
-
-	            "<div class='page-width'>"+
-	             "<div class='mobile-nav'>"+
-	                               "</div>"+
-
-	              "  <ul class='nav left-align'>"+
-	                
-	              "  <li><a style='font-family:微软雅黑' href='#x' title='Work' tabindex=''>发表新帖</a></li>"+
-	              "<li><a style='font-family:微软雅黑' href='#y' title='Work' tabindex=''>查看问题</a></li>"+
-	                
-	                "</ul>"+
-	            "</div>"+
-	        "</header>"+
-	                
-	  "<div id='x' style='height:600px'>"+      
-"<center><h1>提问</h1></center>"+
-"<center><form action='httphandler' method='get'>"+
-"<label for='editor'>你的姓名</label>"+
-"<input type='text' name='editor' value='a visitor'>"+
-"<br/><label for='title'>你想问</label>"+
-"<input type='text' name='title'>"+
-"<br/><label for='detail'>详细内容</label>"+
-"<input type='text' name='detail' value='如题'>"+
-"<input type='text' name='type' style='display:none' value=2>"+
-"<input type='submit' value='提交'>"+
-"</form></center>" + 
-"</div>"+
-
-"<center><a style='font-family:微软雅黑' href='' class='btn'>"+
-"Top"+
-"</a></center>"+
-	        
-	        
-	        "<div class='main' id='y'>"+
-
-	            "<section class='some-of-our-work'>"+
-	                "<h1 style='font-family:微软雅黑'>  </h1>"+
-	                "<div class='page-width'>"+
-	                "<ul class='some-of-our-work-grid' id='details'>"
-			);
-	}
-	private void printtail(PrintWriter out){
-		out.print(
-				"</ul>"+
-	            "</div>"+
-	            "</section>"+
-
-	            "<div class='grad-area'>"+
-	          
-
-	                "<section class='from-the-blog trans-white-bg'>"+
-	                    "<div class='from-the-blog-wrapper visible'>"+
-	                        "<article class='from-the-blog-article'>"+
-	                                
-	                            "<p style='font-family:微软雅黑'>  </p>"+                                  
-	                                                                            
-	                            "<a style='font-family:微软雅黑' href='' class='btn'>"+
-	                                  "Top"+
-	                            "</a>"+
-	                            
-	                       "</article>"+
-	                    "</div>"+
-	                "</section>"+
-
-	                
-	            "</div>"+
-	    "<nav class='hidden-nav'>"+
-	      "<div class='page-width'>"+
-
-	            "<ul class='nav'>"+
-	                "<li><a  style='font-family:微软雅黑' href='' title='Work' tabindex=''>登陆</a></li>"+
-
-	                "<li><a  style='font-family:微软雅黑' href='' title='Work' tabindex=''>注册</a></li>"+
-
-	                "<li><a style='font-family:微软雅黑' href='' title='Work' tabindex=''>发表新帖</a></li>"+
-	            "</ul>"+
-
-	            "<a href='' class='scroll-logo'>"+
-	                "<img src='' class='white-logo' alt=''>"+
-	            "</a>"+
-	        "</div>"+
-	      "</nav>");
-		
-		out.println("  </body>");
-		out.println("</html>");
-		out.flush();
-		out.close();
-		
-	}
-
 	/**
 	 * Initialization of the servlet. <br>
 	 *
