@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -19,13 +19,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script src="javaHomework/jquery-2.1.1.min.js" type="text/javascript"></script>
-	<script type='text/javascript' async='' src='javaHomework/ga.js'></script>
-	<script type='text/javascript' src='javaHomework/modernizr.custom.66147.js'></script>
-	<script type='text/javascript' src='javaHomework/qio6inw.js'></script>
-	<script type='text/javascript' src='javaHomework/25093.js'></script>
-	<link rel='stylesheet' href='javaHomework/responsive-tables.css'>
-	<link rel='stylesheet' href='javaHomework/style.css'>
+	<script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
+	<script type='text/javascript' async='' src='js/ga.js'></script>
+	<script type='text/javascript' src='js/modernizr.custom.66147.js'></script>
+	<script type='text/javascript' src='js/qio6inw.js'></script>
+	<script type='text/javascript' src='js/25093.js'></script>
+	<link rel='stylesheet' href='css/responsive-tables.css'>
+	<link rel='stylesheet' href='css/style.css'>
 	
 	<script>
 	/*
@@ -64,7 +64,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 	});
 	*/
-	$.get("javaHomework/servlet/httphandler?type=1", function(data) {
+	var pathArray = window.location.pathname.split('/');
+	var curProjectLocation = "/" + pathArray[1];
+	$.get(curProjectLocation + "/httphandler", function(data) {
 		$("#questions").html(data);
 	});
 	</script>
