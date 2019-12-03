@@ -4,13 +4,14 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
   <head>
+	<meta charset="UTF-8">
     <base href="<%=basePath%>">
-    
     <title>班级问题交流</title>
-    
+
+
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -66,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	*/
 	var pathArray = window.location.pathname.split('/');
 	var curProjectLocation = "/" + pathArray[1];
-	$.get(curProjectLocation + "/httphandler", function(data) {
+	$.get(curProjectLocation + "/httphandler?type=1", function(data) {
 		$("#questions").html(data);
 	});
 	</script>
